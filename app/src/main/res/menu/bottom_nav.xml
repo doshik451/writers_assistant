@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/mainPage"
+        android:id="@+id/mainPage"
+        android:icon="@drawable/ic_books_page_icon"/>
+    <item android:title="@string/ideasPage"
+        android:id="@+id/ideasPage"
+        android:icon="@drawable/ic_idea_page_icon"/>
+    <item android:title="@string/searchPage"
+        android:id="@+id/searchPage"
+        android:icon="@drawable/ic_search_page_icon"/>
+    <item android:title="@string/profilePage"
+        android:id="@+id/profilePage"
+        android:icon="@drawable/ic_profile_page_icon"/>
+</menu>

@@ -8,4 +8,10 @@
     <string name="register">Register</string>
     <string name="LoginAsLogin">Login</string>
     <string name="ConfirmPassword">Confirm password</string>
+    <string name="mainPage">Your books</string>
+    <string name="ideasPage">Ideas</string>
+    <string name="searchPage">Search</string>
+    <string name="profilePage">Profile</string>
+    <string name="giveAsYourPhoto">Without your permission to use the storage, the program will not work correctly, and you will not be able to change profile pictures, characters or add references.</string>
+    <string name="thxxx">Thanks!</string>
 </resources>

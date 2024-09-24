@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -32,16 +31,16 @@ class LoginActivity : AppCompatActivity() {
         if (isNightMode)Glide.with(this).load(R.drawable.white_cat_running).into(imageCatRunning)
         else Glide.with(this).load(R.drawable.dark_cat_running).into(imageCatRunning)
 
-/*        loginButton.setOnClickListener {
+        loginButton.setOnClickListener {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }*/
+        }
 
         registerTextView.setOnClickListener {
-            if(isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            /*if(isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            recreate()
+            recreate()*/
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
             finish()

@@ -9,4 +9,10 @@
     <string name="register">Регистрация</string>
     <string name="LoginAsLogin">Логин</string>
     <string name="ConfirmPassword">Подтвердить пароль</string>
+    <string name="mainPage">Ваши книги</string>
+    <string name="ideasPage">Идеи</string>
+    <string name="searchPage">Поиск</string>
+    <string name="profilePage">Профиль</string>
+    <string name="giveAsYourPhoto">Без вашего разрешения н использование хранилища программа не будет работать корректно и вы не сможете менять изображение профиля, персонажей и добавлять референсы.</string>
+    <string name="thxxx">Благодарим!</string>
 </resources>
