@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="LightBackground">#FFE7D3</color>
+    <color name="DarkBlue">#060575</color>
+    <color name="FogBlue">#6B6A94</color>
+    <color name="LightButtonBackground">#D7CCC0</color>
+
+    <color name="NightBackground">#00182C</color>
+    <color name="LightYellow">#F9FA8A</color>
+    <color name="FogYellow">#878966</color>
+    <color name="TextInputBackground">#28333F</color>
+</resources>

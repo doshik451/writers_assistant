@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Writer\'s Assistant</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="writers_assistant_as">writer\'s</string>
+    <string name="assistant_writer">assistant</string>
+    <string name="buttonLoginText">Login</string>
+    <string name="register">Register</string>
+    <string name="LoginAsLogin">Login</string>
+    <string name="ConfirmPassword">Confirm password</string>
+</resources>

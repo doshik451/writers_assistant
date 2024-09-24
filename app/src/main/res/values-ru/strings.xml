@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Помощник писателя</string>
+    <string name="Email">Почта</string>
+    <string name="Password">Пароль</string>
+    <string name="writers_assistant_as">помощник</string>
+    <string name="assistant_writer">писателя</string>
+    <string name="buttonLoginText">Войти</string>
+    <string name="register">Регистрация</string>
+    <string name="LoginAsLogin">Логин</string>
+    <string name="ConfirmPassword">Подтвердить пароль</string>
+</resources>
