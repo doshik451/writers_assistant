@@ -14,4 +14,6 @@
     <string name="profilePage">Profile</string>
     <string name="giveAsYourPhoto">Without your permission to use the storage, the program will not work correctly, and you will not be able to change profile pictures, characters or add references.</string>
     <string name="thxxx">Thanks!</string>
+    <string name="about_me">About me</string>
+    <string name="changeApplicationTheme">Change application theme</string>
 </resources>

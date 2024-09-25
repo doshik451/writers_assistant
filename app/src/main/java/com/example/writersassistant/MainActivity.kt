@@ -1,6 +1,7 @@
 package com.example.writersassistant
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -36,8 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
-                R.id.profilePage -> ReplaceFragment(ProfileFragment())
-                else -> {}
+                R.id.profilePage -> {
+                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                    finish()
+                }
+                else -> {startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
+                    finish()}
             }
             true
         }

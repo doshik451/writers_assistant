@@ -62,13 +62,21 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import de.hdodenhof.circleimageview.CircleImageView
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat.recreate
 import com.bumptech.glide.Glide
 
 class ProfileFragment : Fragment() {
 
     private lateinit var profileImageView: CircleImageView
+    private var isNightMode: Boolean = false
+
     private val pickImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
@@ -88,6 +96,29 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         profileImageView = view.findViewById(R.id.profile_image)
+        val aboutEditText: EditText = view.findViewById(R.id.aboutEditText)
+        val changeThemeButton: Button = view.findViewById(R.id.changeThemeButton)
+        val sharedPrefs = requireContext().getSharedPreferences("themePrefs", Context.MODE_PRIVATE)
+        isNightMode = sharedPrefs.getBoolean("isNightMode", false)
+
+        if (isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        changeThemeButton.setOnClickListener {
+            isNightMode = !isNightMode
+            if (isNightMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            sharedPrefs.edit().putBoolean("isNightMode", isNightMode).apply()
+            activity?.recreate()
+        }
+
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> { aboutEditText.setBackgroundResource(R.drawable.rect_base_dark)
+                changeThemeButton.setBackgroundResource(R.drawable.rect_base_dark)}
+            Configuration.UI_MODE_NIGHT_NO -> { aboutEditText.setBackgroundResource(R.drawable.rect_base)
+                changeThemeButton.setBackgroundResource(R.drawable.rect_base)}
+        }
+
         profileImageView.setOnClickListener {
             if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES)
                 != PackageManager.PERMISSION_GRANTED

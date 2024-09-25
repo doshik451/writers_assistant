@@ -15,4 +15,6 @@
     <string name="profilePage">Профиль</string>
     <string name="giveAsYourPhoto">Без вашего разрешения н использование хранилища программа не будет работать корректно и вы не сможете менять изображение профиля, персонажей и добавлять референсы.</string>
     <string name="thxxx">Благодарим!</string>
+    <string name="about_me">О себе</string>
+    <string name="changeApplicationTheme">Сменить тему программы</string>
 </resources>

@@ -35,6 +35,12 @@
         <item name="itemTextColor">@color/white</item>
         <item name="backgroundTint">@color/DarkBlue</item>
     </style>
-
+    <style name="ButtonTextStyle">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="Theme.WritersAssistant" parent="Base.Theme.WritersAssistant" />
 </resources>
