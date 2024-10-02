@@ -9,11 +9,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import androidx.activity.enableEdgeToEdge
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.writersassistant.utils.LoadSettings
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var mainLayout: ConstraintLayout
     override fun onCreate(savedInstanceState: Bundle?) {
+        LoadSettings.applyLocale(this)
+        LoadSettings.applyTheme(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
@@ -22,14 +28,19 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        mainLayout = findViewById(R.id.main)
         val imageCatRunning: ImageView = findViewById(R.id.CatImageView)
         val isNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
         val registerTextView: TextView = findViewById(R.id.tvRegister)
         val loginButton: Button = findViewById(R.id.LoginButton)
 
+
         registerTextView.paint?.isUnderlineText = true
         if (isNightMode)Glide.with(this).load(R.drawable.white_cat_running).into(imageCatRunning)
-        else Glide.with(this).load(R.drawable.dark_cat_running).into(imageCatRunning)
+        else {
+            Glide.with(this).load(R.drawable.dark_cat_running).into(imageCatRunning)
+            mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
+        }
 
         loginButton.setOnClickListener {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <EditText
+        android:id="@+id/editTextLogin"
+        style="@style/hintFontStyle"
+        android:layout_width="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/LoginAsLogin"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        style="@style/hintFontStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLogin" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_profile_page_icon"
+        app:civ_border_color="@color/DarkBlue"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/aboutEditText"
+        android:layout_width="350dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="50dp"
+        android:autofillHints=""
+        android:hint="@string/about_me"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:gravity="top|start"
+        android:textColor="@color/black"
+        android:overScrollMode="always"
+        android:inputType="textMultiLine"
+        android:background="@drawable/rect_base"
+        style="@style/hintFontStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/aboutEditText"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/changeAccountPassword"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_base"
+            style="@style/ButtonTextStyle"
+            android:text="@string/changeAccountPassword"
+            app:layout_constraintBottom_toTopOf="@id/changeThemeButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/changeThemeButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_base"
+            style="@style/ButtonTextStyle"
+            android:text="@string/changeApplicationTheme"
+            app:layout_constraintBottom_toTopOf="@id/changeLanguage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changeAccountPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/changeLanguage"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_base"
+            style="@style/ButtonTextStyle"
+            android:text="@string/changeProgramLanguage"
+            app:layout_constraintBottom_toTopOf="@id/aboutProgramButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changeThemeButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/aboutProgramButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_base"
+            style="@style/ButtonTextStyle"
+            android:text="@string/aboutApplication"
+            app:layout_constraintBottom_toTopOf="@id/logOutOfAccountButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changeLanguage" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/logOutOfAccountButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_base"
+            style="@style/ButtonTextStyle"
+            android:text="@string/logOutOfAccount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aboutProgramButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BottomNavigationStyle"
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</androidx.constraintlayout.widget.ConstraintLayout>
