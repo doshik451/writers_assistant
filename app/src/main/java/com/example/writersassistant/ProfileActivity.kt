@@ -55,6 +55,7 @@ class ProfileActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+
         mainLayout = findViewById(R.id.main)
         val isNightMode = LoadSettings.loadTheme(this)
         val profileImageView: CircleImageView = findViewById(R.id.profile_image)
