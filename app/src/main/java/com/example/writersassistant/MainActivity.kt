@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.replace
 import com.example.writersassistant.databinding.ActivityMainBinding
 import com.example.writersassistant.utils.LoadSettings
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         LoadSettings.applyTheme(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val user = FirebaseAuth.getInstance().currentUser
         val isNightMode = LoadSettings.loadTheme(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
+/*        val userName: TextView = findViewById(R.id.userLogin)
+        val userEmail: TextView = findViewById(R.id.userEmail)
+        userName.setText(user?.displayName)
+        userEmail.setText(user?.email)*/
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){

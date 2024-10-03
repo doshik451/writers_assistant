@@ -21,4 +21,11 @@
     <string name="aboutApplication">About application</string>
     <string name="logOutOfAccount">Log out of your account</string>
     <string name="aboutAppText">Writer\'s Assistant is a mobile app designed to help writers organize their creative process. Whether you\'re working on a novel, a screenplay, or a blog, this app provides essential tools for planning, writing, and managing your projects. Easily create character profiles, map out plotlines, and store all your notes in one place. Writer\'s Assistant ensures that your creative flow stays uninterrupted, and all your ideas are well-organized.</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_passwords">Enter passwords</string>
+    <string name="passwords_don_t_match">Passwords don\'t match</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="enter_login">Enter login</string>
+    <string name="image_loading_error">Image loading error</string>
+    <string name="profile_image_updated">Profile image updated</string>
 </resources>

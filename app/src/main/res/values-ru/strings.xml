@@ -22,4 +22,11 @@
     <string name="aboutApplication">О программе</string>
     <string name="logOutOfAccount">Выйти из аккаунта</string>
     <string name="aboutAppText">Помощник писателя — это мобильное приложение, созданное для помощи авторам в организации их творческого процесса. Независимо от того, работаете ли вы над романом, сценарием или блогом, приложение предоставляет ключевые инструменты для планирования, написания и управления проектами. Создавайте профили персонажей, стройте сюжетные линии и храните все ваши заметки в одном месте. Помощник писателя помогает сохранить творческий поток и организовать все ваши идеи.</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="enter_passwords">Введите пароли</string>
+    <string name="passwords_don_t_match">Пароли не совпадают</string>
+    <string name="authentication_failed">Аутентификация провалена</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="image_loading_error">Ошибка загрузки изображения</string>
+    <string name="profile_image_updated">Изображение профиля обновлено</string>
 </resources>
