@@ -51,6 +51,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         LoadSettings.applyLocale(this)
         LoadSettings.applyTheme(this)
