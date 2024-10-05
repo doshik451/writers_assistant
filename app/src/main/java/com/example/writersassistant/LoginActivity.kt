@@ -51,17 +51,21 @@ class LoginActivity : AppCompatActivity() {
         }
         mainLayout = findViewById(R.id.main)
         val imageCatRunning: ImageView = findViewById(R.id.CatImageView)
-        val isNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        val isNightMode = LoadSettings.loadTheme(this)
         val registerTextView: TextView = findViewById(R.id.tvRegister)
         val loginButton: Button = findViewById(R.id.LoginButton)
         val emailTextInput: EditText = findViewById(R.id.editTextTextEmailAddress)
         val passwordEditText: EditText = findViewById(R.id.editTextTextPassword)
-
+        val forgetPasswordButton: TextView = findViewById(R.id.forgetPasswordText)
         registerTextView.paint?.isUnderlineText = true
-        if (isNightMode)Glide.with(this).load(R.drawable.white_cat_running).into(imageCatRunning)
+        if (isNightMode) Glide.with(this).load(R.drawable.white_cat_running).into(imageCatRunning)
         else {
             Glide.with(this).load(R.drawable.dark_cat_running).into(imageCatRunning)
             mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
+        }
+
+        forgetPasswordButton.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ResetPasswordAcrivity::class.java))
         }
 
         loginButton.setOnClickListener {

@@ -14,7 +14,6 @@
     <string name="profilePage">Profile</string>
     <string name="giveAsYourPhoto">Without your permission to use the storage, the program will not work correctly, and you will not be able to change profile pictures, characters or add references.</string>
     <string name="thxxx">Thanks!</string>
-    <string name="about_me">About me</string>
     <string name="changeApplicationTheme">Change application theme</string>
     <string name="changeAccountPassword">Change account password</string>
     <string name="changeProgramLanguage">Change application language</string>
@@ -28,4 +27,17 @@
     <string name="enter_login">Enter login</string>
     <string name="image_loading_error">Image loading error</string>
     <string name="profile_image_updated">Profile image updated</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="resetPassword">Reset password</string>
+    <string name="sendEmail">Send reset letter</string>
+    <string name="letterIsSended">A letter has been send to your email</string>
+    <string name="sentError">Error sending email</string>
+    <string name="accountEmail">Account email</string>
+    <string name="yourBooksTitle">Your books</string>
+    <string name="bookName">Book name</string>
+    <string name="authorNameTitle">Author</string>
+    <string name="book_description">Description</string>
+    <string name="charactersButton">Characters</string>
+    <string name="chaptersButton">Chapters</string>
+    <string name="dictionaryButton">Dictionary</string>
 </resources>

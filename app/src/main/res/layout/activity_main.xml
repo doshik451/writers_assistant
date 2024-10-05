@@ -16,6 +16,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/mainPageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yourBooksTitle"
+            style="@style/fontNameStyle"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/plusBookButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@id/mainPageTitle"
+            app:layout_constraintTop_toTopOf="@id/mainPageTitle"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/mainPageTitle"
+            android:src="@drawable/circle_plus_button_base_light"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

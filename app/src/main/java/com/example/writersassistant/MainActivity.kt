@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
+    private lateinit var addBookButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         LoadSettings.applyLocale(this)
@@ -44,15 +46,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
+        addBookButton = findViewById(R.id.plusBookButton)
 /*        val userName: TextView = findViewById(R.id.userLogin)
         val userEmail: TextView = findViewById(R.id.userEmail)
         userName.setText(user?.displayName)
         userEmail.setText(user?.email)*/
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
+        else addBookButton.setImageResource(R.drawable.circle_plus_button_base_dark)
+        addBookButton.setOnClickListener {
+            startActivity(Intent(this@MainActivity, BookInfoActivity::class.java))
+        }
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.profilePage -> {
                     startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+                    finish()
+                }
+                R.id.mainPage -> {
+                    startActivity(Intent(this@MainActivity, MainActivity::class.java))
                     finish()
                 }
                 else -> {startActivity(Intent(this@MainActivity, RegisterActivity::class.java))

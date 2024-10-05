@@ -58,18 +58,6 @@
         app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changeAccountPassword"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/rect_base"
-            style="@style/ButtonTextStyle"
-            android:text="@string/changeAccountPassword"
-            app:layout_constraintBottom_toTopOf="@id/changeThemeButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/changeThemeButton"
@@ -82,7 +70,7 @@
             app:layout_constraintBottom_toTopOf="@id/changeLanguage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/changeAccountPassword" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/changeLanguage"

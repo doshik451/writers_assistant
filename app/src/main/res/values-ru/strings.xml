@@ -15,7 +15,6 @@
     <string name="profilePage">Профиль</string>
     <string name="giveAsYourPhoto">Без вашего разрешения н использование хранилища программа не будет работать корректно и вы не сможете менять изображение профиля, персонажей и добавлять референсы.</string>
     <string name="thxxx">Благодарим!</string>
-    <string name="about_me">О себе</string>
     <string name="changeApplicationTheme">Сменить тему программы</string>
     <string name="changeAccountPassword">Сменить пароль аккаунта</string>
     <string name="changeProgramLanguage">Сменить язык программы</string>
@@ -29,4 +28,17 @@
     <string name="enter_login">Введите логин</string>
     <string name="image_loading_error">Ошибка загрузки изображения</string>
     <string name="profile_image_updated">Изображение профиля обновлено</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="resetPassword">Сброс пароля</string>
+    <string name="sendEmail">Отправить письмо для сброса</string>
+    <string name="letterIsSended">Письмо было отправлено на вашу почту</string>
+    <string name="sentError">Ошибка отправки письма</string>
+    <string name="accountEmail">Почта аккаунта</string>
+    <string name="yourBooksTitle">Ваши книги</string>
+    <string name="bookName">Название книги</string>
+    <string name="authorNameTitle">Автор</string>
+    <string name="book_description">Описание</string>
+    <string name="charactersButton">Персонажи</string>
+    <string name="chaptersButton">Главы</string>
+    <string name="dictionaryButton">Словарь</string>
 </resources>
