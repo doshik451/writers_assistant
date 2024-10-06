@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".CharactersListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayoutMainActivity"
@@ -20,7 +20,7 @@
             android:id="@+id/mainPageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/yourBooksTitle"
+            android:text="@string/charactersButton"
             style="@style/fontNameStyle"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-            android:id="@+id/plusBookButton"
+            android:id="@+id/plusCharacterButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="20dp"
@@ -41,8 +41,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/plusBookButton"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/plusCharacterButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -62,21 +62,21 @@
                     android:background="@drawable/rect_base"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <!--<androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button2"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
-                    android:layout_marginTop="20dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button1"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button3"
@@ -84,13 +84,13 @@
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button2"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button4"
@@ -98,13 +98,13 @@
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button3"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button5"
@@ -112,13 +112,13 @@
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button4"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button6"
@@ -127,12 +127,12 @@
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button5"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button7"
@@ -141,12 +141,12 @@
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button6"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button8"
@@ -154,13 +154,13 @@
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button7"
-                    android:text="@string/bookName"/>
+                    android:text="@string/characterName"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button9"
@@ -168,16 +168,29 @@
                     android:layout_height="wrap_content"
                     style="@style/ButtonTextStyle"
                     android:paddingStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:paddingEnd="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/button8"
-                    android:text="@string/bookName"/>-->
+                    android:text="@string/characterName"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button10"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    style="@style/ButtonTextStyle"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/rect_base"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/button9"
+                    android:text="@string/characterName"/>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

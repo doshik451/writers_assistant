@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterInfoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/characterImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/ic_profile_page_icon"
+            app:civ_border_color="@color/DarkBlue"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextCharacterName"
+            style="@style/hintFontStyle"
+            android:layout_width="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/characterName"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/characterImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextCharacterAge"
+            style="@style/hintFontStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/characterAge"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/characterImage"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCharacterName" />
+
+        <EditText
+            android:id="@+id/characterAppearanceDescriptionEditText"
+            android:layout_width="350dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:hint="@string/appearanceDescription"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:gravity="top|start"
+            android:textColor="@color/black"
+            android:overScrollMode="always"
+            android:inputType="textMultiLine"
+            android:background="@drawable/rect_base"
+            style="@style/hintFontStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCharacterAge"/>
+
+        <EditText
+            android:id="@+id/roleInTheBookEditText"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:hint="@string/roleInTheBook"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:gravity="top|start"
+            android:textColor="@color/black"
+            android:overScrollMode="always"
+            android:inputType="textMultiLine"
+            android:background="@drawable/rect_base"
+            style="@style/hintFontStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/characterAppearanceDescriptionEditText"/>
+
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="350dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:hint="@string/book_description"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:gravity="top|start"
+            android:textColor="@color/black"
+            android:overScrollMode="always"
+            android:inputType="textMultiLine"
+            android:background="@drawable/rect_base"
+            style="@style/hintFontStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roleInTheBookEditText"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/connectionButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/descriptionEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            style="@style/ButtonTextStyle"
+            android:text="@string/connections"
+            android:background="@drawable/rect_base"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/groupsButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/connectionButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            style="@style/ButtonTextStyle"
+            android:text="@string/groups"
+            android:background="@drawable/rect_base"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BottomNavigationStyle"
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</androidx.constraintlayout.widget.ConstraintLayout>

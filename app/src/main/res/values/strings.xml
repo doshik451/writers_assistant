@@ -40,4 +40,10 @@
     <string name="charactersButton">Characters</string>
     <string name="chaptersButton">Chapters</string>
     <string name="dictionaryButton">Dictionary</string>
+    <string name="characterName">Character name</string>
+    <string name="characterAge">Character age</string>
+    <string name="appearanceDescription">Description of appearance</string>
+    <string name="roleInTheBook">Role in the book</string>
+    <string name="connections">Connections</string>
+    <string name="groups">Groups</string>
 </resources>

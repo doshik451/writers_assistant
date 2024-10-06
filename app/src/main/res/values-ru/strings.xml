@@ -41,4 +41,10 @@
     <string name="charactersButton">Персонажи</string>
     <string name="chaptersButton">Главы</string>
     <string name="dictionaryButton">Словарь</string>
+    <string name="characterName">Имя персонажа</string>
+    <string name="characterAge">Возраст персонажа</string>
+    <string name="appearanceDescription">Описание внешности</string>
+    <string name="roleInTheBook">Роль в книге</string>
+    <string name="connections">Связи</string>
+    <string name="groups">Группы</string>
 </resources>

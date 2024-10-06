@@ -47,10 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
         addBookButton = findViewById(R.id.plusBookButton)
-/*        val userName: TextView = findViewById(R.id.userLogin)
-        val userEmail: TextView = findViewById(R.id.userEmail)
-        userName.setText(user?.displayName)
-        userEmail.setText(user?.email)*/
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
         else addBookButton.setImageResource(R.drawable.circle_plus_button_base_dark)
         addBookButton.setOnClickListener {

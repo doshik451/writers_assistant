@@ -57,6 +57,10 @@ class BookInfoActivity : AppCompatActivity() {
         user = FirebaseAuth.getInstance().currentUser!!
         authorNameInput.setText(user.displayName)
 
+        charactersButton.setOnClickListener {
+            startActivity(Intent(this@BookInfoActivity, CharactersListActivity::class.java))
+        }
+
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.profilePage -> {
