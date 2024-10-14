@@ -1,9 +1,14 @@
 package com.example.writersassistant
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,10 +16,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.writersassistant.databinding.ActivityBookInfoBinding
-import com.example.writersassistant.databinding.ActivityMainBinding
 import com.example.writersassistant.utils.LoadSettings
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
 
 class BookInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookInfoBinding
@@ -23,11 +32,15 @@ class BookInfoActivity : AppCompatActivity() {
     private lateinit var bookDescription: EditText
     private lateinit var charactersButton: Button
     private lateinit var chaptersButton: Button
-    private lateinit var ideasButton: Button
     private lateinit var dictionaryButton: Button
+    private lateinit var deleteBookButton: Button
+    private lateinit var bookTitle: EditText
+    private lateinit var database: DatabaseReference
+    private var bookId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         enableEdgeToEdge()
         binding = ActivityBookInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,24 +55,31 @@ class BookInfoActivity : AppCompatActivity() {
         bookDescription = findViewById(R.id.bookDescriptionEditText)
         charactersButton = findViewById(R.id.characterListButton)
         chaptersButton = findViewById(R.id.chaptersListButton)
-        ideasButton = findViewById(R.id.ideasListButton)
         dictionaryButton = findViewById(R.id.dictionaryListButton)
+        bookTitle = findViewById(R.id.bookTitleEditText)
+        deleteBookButton = findViewById(R.id.deleteBookButton)
 
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
         else{
             bookDescription.setBackgroundResource(R.drawable.rect_base_dark)
             charactersButton.setBackgroundResource(R.drawable.rect_base_dark)
             chaptersButton.setBackgroundResource(R.drawable.rect_base_dark)
-            ideasButton.setBackgroundResource(R.drawable.rect_base_dark)
             dictionaryButton.setBackgroundResource(R.drawable.rect_base_dark)
+            deleteBookButton.setBackgroundResource(R.drawable.rect_base_dark)
         }
         authorNameInput = findViewById(R.id.authorNameEditText)
         user = FirebaseAuth.getInstance().currentUser!!
-        authorNameInput.setText(user.displayName)
+
+        database = FirebaseDatabase.getInstance().reference
+        bookId = intent.getStringExtra("BOOK_ID") ?: database.child("books").push().key
+        if (bookId != null) loadBookData(bookId!!)
+        setupTextChangeListeners()
+        deleteBookButton.setOnClickListener { deleteBook() }
 
         charactersButton.setOnClickListener {
             startActivity(Intent(this@BookInfoActivity, CharactersListActivity::class.java))
         }
+        authorNameInput.setText(user.displayName)
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
@@ -76,5 +96,71 @@ class BookInfoActivity : AppCompatActivity() {
             }
             true
         }
+    }
+    private fun loadBookData(bookId: String) {
+        database.child("books").child(bookId).get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                bookTitle.setText(snapshot.child("title").value.toString())
+                bookDescription.setText(snapshot.child("description").value.toString())
+                authorNameInput.setText(snapshot.child("authorName").value.toString())
+            }
+        }
+    }
+
+    private fun setupTextChangeListeners() {
+        bookTitle.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                saveBookData()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        bookDescription.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                saveBookData()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        authorNameInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                saveBookData()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun saveBookData() {
+        val bookTitleText: String = bookTitle.text.toString()
+        val authorName: String = authorNameInput.text.toString()
+
+        if(bookTitleText.isNullOrEmpty() || authorName.isNullOrEmpty()) return
+
+        val bookData = mapOf(
+            "title" to bookTitleText,
+            "description" to bookDescription.text.toString(),
+            "authorId" to user.uid,
+            "authorName" to authorName
+        )
+        bookId?.let {
+            database.child("books").child(it).setValue(bookData)
+        }
+    }
+
+    private fun deleteBook() {
+        AlertDialog.Builder(this).setTitle(R.string.deletionConfirmation)
+            .setMessage(R.string.deletingBookText)
+            .setPositiveButton(R.string.answerYes) { dialog, which ->
+                bookId?.let {
+                    database.child("books").child(it).removeValue().addOnSuccessListener {
+                        Toast.makeText(this, R.string.bookDeleted, Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@BookInfoActivity, MainActivity::class.java))
+                        finish()
+                    }.addOnFailureListener { Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()}
+                }
+            }.setNegativeButton(R.string.answerNo, null).show()
     }
 }

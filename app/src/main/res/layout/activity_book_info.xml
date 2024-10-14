@@ -7,112 +7,115 @@
     android:layout_height="match_parent"
     tools:context=".BookInfoActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
 
-        <EditText
-            android:id="@+id/bookNameTitleEditText"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            style="@style/hintFontStyle"
-            android:autofillHints=""
-            android:inputType="text"
-            android:textSize="40sp"
-            android:hint="@string/bookName"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/bookTitleEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                style="@style/hintFontStyle"
+                android:autofillHints=""
+                android:inputType="text"
+                android:textSize="40sp"
+                android:hint="@string/bookName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/authorTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/bookNameTitleEditText"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/authorNameTitle"
-            style="@style/someTextStyle" />
+            <TextView
+                android:id="@+id/authorTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/bookTitleEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/authorNameTitle"
+                style="@style/someTextStyle" />
 
-        <EditText
-            android:id="@+id/authorNameEditText"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            style="@style/hintFontStyle"
-            android:autofillHints=""
-            android:inputType="text"
-            app:layout_constraintStart_toEndOf="@id/authorTitleTextView"
-            app:layout_constraintTop_toTopOf="@id/authorTitleTextView"
-            app:layout_constraintBottom_toBottomOf="@id/authorTitleTextView"/>
+            <EditText
+                android:id="@+id/authorNameEditText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                style="@style/hintFontStyle"
+                android:autofillHints=""
+                android:inputType="text"
+                app:layout_constraintStart_toEndOf="@id/authorTitleTextView"
+                app:layout_constraintTop_toTopOf="@id/authorTitleTextView"
+                app:layout_constraintBottom_toBottomOf="@id/authorTitleTextView"/>
 
-        <EditText
-            android:id="@+id/bookDescriptionEditText"
-            android:layout_width="350dp"
-            android:layout_height="170dp"
-            android:layout_marginTop="20dp"
-            android:autofillHints=""
-            android:hint="@string/book_description"
-            android:padding="16dp"
-            android:scrollbars="vertical"
-            android:gravity="top|start"
-            android:textColor="@color/black"
-            android:overScrollMode="always"
-            android:inputType="textMultiLine"
-            android:background="@drawable/rect_base"
-            style="@style/hintFontStyle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/authorNameEditText"/>
+            <EditText
+                android:id="@+id/bookDescriptionEditText"
+                android:layout_width="350dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:hint="@string/book_description"
+                android:padding="16dp"
+                android:scrollbars="vertical"
+                android:gravity="top|start"
+                android:overScrollMode="always"
+                android:inputType="textMultiLine"
+                android:background="@drawable/rect_base"
+                style="@style/hintFontStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authorNameEditText"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/characterListButton"
-            android:layout_width="350dp"
-            android:layout_marginTop="30dp"
-            android:layout_height="wrap_content"
-            android:text="@string/charactersButton"
-            style="@style/ButtonTextStyle"
-            app:layout_constraintTop_toBottomOf="@id/bookDescriptionEditText"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rect_base"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/characterListButton"
+                android:layout_width="350dp"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:text="@string/charactersButton"
+                style="@style/ButtonTextStyle"
+                app:layout_constraintTop_toBottomOf="@id/bookDescriptionEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/chaptersListButton"
-            android:layout_width="350dp"
-            android:layout_marginTop="10dp"
-            style="@style/ButtonTextStyle"
-            android:text="@string/chaptersButton"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/characterListButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rect_base"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/chaptersListButton"
+                android:layout_width="350dp"
+                android:layout_marginTop="15dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/chaptersButton"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/characterListButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/ideasListButton"
-            android:layout_width="350dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:text="@string/ideasPage"
-            style="@style/ButtonTextStyle"
-            app:layout_constraintTop_toBottomOf="@id/chaptersListButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rect_base"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dictionaryListButton"
+                android:layout_width="350dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/dictionaryButton"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/chaptersListButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dictionaryListButton"
-            android:layout_width="350dp"
-            style="@style/ButtonTextStyle"
-            android:text="@string/dictionaryButton"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ideasListButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/rect_base"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/deleteBookButton"
+                android:layout_width="350dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/delete_book"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dictionaryListButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

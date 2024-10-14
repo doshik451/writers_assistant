@@ -46,4 +46,11 @@
     <string name="roleInTheBook">Role in the book</string>
     <string name="connections">Connections</string>
     <string name="groups">Groups</string>
+    <string name="delete_book">Delete book</string>
+    <string name="deletionConfirmation">Deletion confirmation</string>
+    <string name="deletingBookText">Are you sure you want to delete the book?</string>
+    <string name="answerYes">Yes</string>
+    <string name="answerNo">No</string>
+    <string name="bookDeleted">Book deleted</string>
+    <string name="deletionError">Deletion error</string>
 </resources>

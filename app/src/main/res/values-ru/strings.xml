@@ -47,4 +47,11 @@
     <string name="roleInTheBook">Роль в книге</string>
     <string name="connections">Связи</string>
     <string name="groups">Группы</string>
+    <string name="delete_book">Удалить книгу</string>
+    <string name="deletionConfirmation">Подтверждение удаления</string>
+    <string name="deletingBookText">Вы уверены что хотите удалиить книгу?</string>
+    <string name="answerYes">Да</string>
+    <string name="answerNo">Нет</string>
+    <string name="bookDeleted">Книга удалена</string>
+    <string name="deletionError">Ошибка удаления</string>
 </resources>
