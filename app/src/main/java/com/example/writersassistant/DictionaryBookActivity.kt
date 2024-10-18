@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.writersassistant.databinding.ActivityCharactersListBinding
+import com.example.writersassistant.databinding.ActivityDictionaryBookBinding
 import com.example.writersassistant.utils.LoadSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -22,19 +22,19 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class CharactersListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCharactersListBinding
-    private lateinit var addCharacterButton: ImageView
+class DictionaryBookActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDictionaryBookBinding
+    private lateinit var addWordButton: ImageView
     private lateinit var bookId: String
     private lateinit var database: DatabaseReference
-    private lateinit var charactersListLayout: LinearLayout
+    private lateinit var wordsListLayout: LinearLayout
     private var isNightMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         isNightMode = LoadSettings.loadTheme(this)
-        binding = ActivityCharactersListBinding.inflate(layoutInflater)
+        binding = ActivityDictionaryBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,17 +42,16 @@ class CharactersListActivity : AppCompatActivity() {
             insets
         }
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
-        addCharacterButton = findViewById(R.id.plusCharacterButton)
+        addWordButton = findViewById(R.id.plusWordButton)
         bookId = intent.getStringExtra("BOOK_ID").toString()
-        charactersListLayout = findViewById(R.id.charactersListLayout)
+        wordsListLayout = findViewById(R.id.wordsListLayout)
         database = FirebaseDatabase.getInstance().reference.child("books")
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
-        else addCharacterButton.setImageResource(R.drawable.circle_plus_button_base_dark)
+        else addWordButton.setImageResource(R.drawable.circle_plus_button_base_dark)
 
-        loadCharacters()
-
-        addCharacterButton.setOnClickListener {
-            val intent = Intent(this@CharactersListActivity, CharacterInfoActivity::class.java)
+        loadWords()
+        addWordButton.setOnClickListener {
+            val intent = Intent(this@DictionaryBookActivity, WordInfoActivity::class.java)
             intent.putExtra("BOOK_ID", bookId)
             startActivity(intent)
         }
@@ -60,15 +59,15 @@ class CharactersListActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.profilePage -> {
-                    startActivity(Intent(this@CharactersListActivity, ProfileActivity::class.java))
+                    startActivity(Intent(this@DictionaryBookActivity, ProfileActivity::class.java))
                     finish()
                 }
                 R.id.mainPage -> {
-                    startActivity(Intent(this@CharactersListActivity, MainActivity::class.java))
+                    startActivity(Intent(this@DictionaryBookActivity, MainActivity::class.java))
                     finish()
                 }
                 R.id.ideasPage -> {
-                    startActivity(Intent(this@CharactersListActivity, IdeasListActivity::class.java))
+                    startActivity(Intent(this@DictionaryBookActivity, IdeasListActivity::class.java))
                     finish()
                 }
                 else -> true
@@ -76,13 +75,14 @@ class CharactersListActivity : AppCompatActivity() {
             true
         }
     }
-    private fun loadCharacters() {
+
+    private fun loadWords() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val currentBook = intent.getStringExtra("BOOK_ID")
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                charactersListLayout.removeAllViews()
+                wordsListLayout.removeAllViews()
                 val density = resources.displayMetrics.density
 
                 for (bookSnapshot in snapshot.children) {
@@ -90,11 +90,11 @@ class CharactersListActivity : AppCompatActivity() {
                     val authorId = bookSnapshot.child("authorId").value.toString()
                     if (authorId == currentUserId) {
                         if(bookId == currentBook) {
-                            for (characterSnapshot in bookSnapshot.child("characters").children) {
-                                val characterId = characterSnapshot.key ?: continue
-                                val characterName = characterSnapshot.child("characterName").value.toString()
-                                val characterButton = Button(this@CharactersListActivity).apply {
-                                    text = characterName
+                            for (dictionarySnapshot in bookSnapshot.child("dictionary").children) {
+                                val wordId = dictionarySnapshot.key ?: continue
+                                val wordTitle = dictionarySnapshot.child("wordTitle").value.toString()
+                                val wordButton = Button(this@DictionaryBookActivity).apply {
+                                    text = wordTitle
                                     layoutParams = LinearLayout.LayoutParams(
                                         (350 * density).toInt(),
                                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -105,18 +105,18 @@ class CharactersListActivity : AppCompatActivity() {
                                     setTextAppearance(R.style.ButtonTextStyle)
                                     setOnClickListener {
                                         val intent = Intent(
-                                            this@CharactersListActivity,
-                                            CharacterInfoActivity::class.java
+                                            this@DictionaryBookActivity,
+                                            WordInfoActivity::class.java
                                         )
                                         intent.putExtra("BOOK_ID", bookId)
-                                        intent.putExtra("CHARACTER_ID", characterId)
+                                        intent.putExtra("WORD_ID", wordId)
                                         startActivity(intent)
                                     }
                                 }
-                                characterButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
-                                if (isNightMode) characterButton.setBackgroundResource(R.drawable.rect_base_dark)
-                                else characterButton.setBackgroundResource(R.drawable.rect_base)
-                                charactersListLayout.addView(characterButton)
+                                wordButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
+                                if (isNightMode) wordButton.setBackgroundResource(R.drawable.rect_base_dark)
+                                else wordButton.setBackgroundResource(R.drawable.rect_base)
+                                wordsListLayout.addView(wordButton)
                             }
                         }
                     }
@@ -124,7 +124,7 @@ class CharactersListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@CharactersListActivity, "Failed to load characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DictionaryBookActivity, "Failed to load words.", Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -41,6 +41,10 @@ class AboutApplication : AppCompatActivity() {
                     startActivity(Intent(this@AboutApplication, ProfileActivity::class.java))
                     finish()
                 }
+                R.id.ideasPage -> {
+                    startActivity(Intent(this@AboutApplication, IdeasListActivity::class.java))
+                    finish()
+                }
                 else -> {startActivity(Intent(this@AboutApplication, RegisterActivity::class.java))
                     finish()}
             }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlaceInfoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/placeTitleEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                style="@style/hintFontStyle"
+                android:autofillHints=""
+                android:inputType="text"
+                android:textSize="40sp"
+                android:hint="@string/placeTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <EditText
+                android:id="@+id/placeDescriptionEditText"
+                android:layout_width="350dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:hint="@string/book_description"
+                android:padding="16dp"
+                android:scrollbars="vertical"
+                android:gravity="top|start"
+                android:overScrollMode="always"
+                android:inputType="textMultiLine"
+                android:background="@drawable/rect_base"
+                style="@style/hintFontStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/placeTitleEditText"/>
+
+            <TextView
+                android:id="@+id/placeReferencesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/references"
+                style="@style/fontNameStyle"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/placeDescriptionEditText"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/plusReferenceButton"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toEndOf="@id/placeReferencesTitle"
+                app:layout_constraintTop_toTopOf="@id/placeReferencesTitle"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/placeReferencesTitle"
+                android:src="@drawable/circle_plus_button_base_light"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/deletePlaceButton"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/plusReferenceButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/deletePlace"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rect_base"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/BottomNavigationStyle"
+        android:background="@color/DarkBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

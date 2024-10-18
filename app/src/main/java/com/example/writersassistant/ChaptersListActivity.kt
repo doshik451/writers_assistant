@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.writersassistant.databinding.ActivityChaptersListBinding
 import com.example.writersassistant.databinding.ActivityCharactersListBinding
 import com.example.writersassistant.utils.LoadSettings
 import com.google.firebase.auth.FirebaseAuth
@@ -22,19 +23,19 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class CharactersListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCharactersListBinding
-    private lateinit var addCharacterButton: ImageView
+class ChaptersListActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityChaptersListBinding
+    private lateinit var addChapterButton: ImageView
     private lateinit var bookId: String
     private lateinit var database: DatabaseReference
-    private lateinit var charactersListLayout: LinearLayout
+    private lateinit var chaptersListLayout: LinearLayout
     private var isNightMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         isNightMode = LoadSettings.loadTheme(this)
-        binding = ActivityCharactersListBinding.inflate(layoutInflater)
+        binding = ActivityChaptersListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -42,17 +43,16 @@ class CharactersListActivity : AppCompatActivity() {
             insets
         }
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
-        addCharacterButton = findViewById(R.id.plusCharacterButton)
+        addChapterButton = findViewById(R.id.plusChapterButton)
         bookId = intent.getStringExtra("BOOK_ID").toString()
-        charactersListLayout = findViewById(R.id.charactersListLayout)
+        chaptersListLayout = findViewById(R.id.chaptersListLayout)
         database = FirebaseDatabase.getInstance().reference.child("books")
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
-        else addCharacterButton.setImageResource(R.drawable.circle_plus_button_base_dark)
+        else addChapterButton.setImageResource(R.drawable.circle_plus_button_base_dark)
 
-        loadCharacters()
-
-        addCharacterButton.setOnClickListener {
-            val intent = Intent(this@CharactersListActivity, CharacterInfoActivity::class.java)
+        loadChapters()
+        addChapterButton.setOnClickListener {
+            val intent = Intent(this@ChaptersListActivity, ChaptersInfoActivity::class.java)
             intent.putExtra("BOOK_ID", bookId)
             startActivity(intent)
         }
@@ -60,15 +60,15 @@ class CharactersListActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.profilePage -> {
-                    startActivity(Intent(this@CharactersListActivity, ProfileActivity::class.java))
+                    startActivity(Intent(this@ChaptersListActivity, ProfileActivity::class.java))
                     finish()
                 }
                 R.id.mainPage -> {
-                    startActivity(Intent(this@CharactersListActivity, MainActivity::class.java))
+                    startActivity(Intent(this@ChaptersListActivity, MainActivity::class.java))
                     finish()
                 }
                 R.id.ideasPage -> {
-                    startActivity(Intent(this@CharactersListActivity, IdeasListActivity::class.java))
+                    startActivity(Intent(this@ChaptersListActivity, IdeasListActivity::class.java))
                     finish()
                 }
                 else -> true
@@ -76,13 +76,14 @@ class CharactersListActivity : AppCompatActivity() {
             true
         }
     }
-    private fun loadCharacters() {
+
+    private fun loadChapters() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val currentBook = intent.getStringExtra("BOOK_ID")
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                charactersListLayout.removeAllViews()
+                chaptersListLayout.removeAllViews()
                 val density = resources.displayMetrics.density
 
                 for (bookSnapshot in snapshot.children) {
@@ -90,11 +91,11 @@ class CharactersListActivity : AppCompatActivity() {
                     val authorId = bookSnapshot.child("authorId").value.toString()
                     if (authorId == currentUserId) {
                         if(bookId == currentBook) {
-                            for (characterSnapshot in bookSnapshot.child("characters").children) {
-                                val characterId = characterSnapshot.key ?: continue
-                                val characterName = characterSnapshot.child("characterName").value.toString()
-                                val characterButton = Button(this@CharactersListActivity).apply {
-                                    text = characterName
+                            for (chapterSnapshot in bookSnapshot.child("chapters").children) {
+                                val chapterId = chapterSnapshot.key ?: continue
+                                val chapterName = chapterSnapshot.child("chapterName").value.toString()
+                                val chapterButton = Button(this@ChaptersListActivity).apply {
+                                    text = chapterName
                                     layoutParams = LinearLayout.LayoutParams(
                                         (350 * density).toInt(),
                                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -105,18 +106,18 @@ class CharactersListActivity : AppCompatActivity() {
                                     setTextAppearance(R.style.ButtonTextStyle)
                                     setOnClickListener {
                                         val intent = Intent(
-                                            this@CharactersListActivity,
-                                            CharacterInfoActivity::class.java
+                                            this@ChaptersListActivity,
+                                            ChaptersInfoActivity::class.java
                                         )
                                         intent.putExtra("BOOK_ID", bookId)
-                                        intent.putExtra("CHARACTER_ID", characterId)
+                                        intent.putExtra("CHAPTER_ID", chapterId)
                                         startActivity(intent)
                                     }
                                 }
-                                characterButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
-                                if (isNightMode) characterButton.setBackgroundResource(R.drawable.rect_base_dark)
-                                else characterButton.setBackgroundResource(R.drawable.rect_base)
-                                charactersListLayout.addView(characterButton)
+                                chapterButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
+                                if (isNightMode) chapterButton.setBackgroundResource(R.drawable.rect_base_dark)
+                                else chapterButton.setBackgroundResource(R.drawable.rect_base)
+                                chaptersListLayout.addView(chapterButton)
                             }
                         }
                     }
@@ -124,7 +125,7 @@ class CharactersListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@CharactersListActivity, "Failed to load characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChaptersListActivity, "Failed to load chapters.", Toast.LENGTH_SHORT).show()
             }
         })
     }

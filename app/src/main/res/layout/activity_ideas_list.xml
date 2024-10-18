@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharactersListActivity">
-
+    tools:context=".IdeasListActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayoutMainActivity"
         android:layout_width="0dp"
@@ -17,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/mainPageTitle"
+            android:id="@+id/ideasListPageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/charactersButton"
+            android:text="@string/ideasPage"
             style="@style/fontNameStyle"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
@@ -28,14 +27,14 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-            android:id="@+id/plusCharacterButton"
+            android:id="@+id/plusIdeaButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="20dp"
-            app:layout_constraintStart_toEndOf="@id/mainPageTitle"
-            app:layout_constraintTop_toTopOf="@id/mainPageTitle"
+            app:layout_constraintStart_toEndOf="@id/ideasListPageTitle"
+            app:layout_constraintTop_toTopOf="@id/ideasListPageTitle"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/mainPageTitle"
+            app:layout_constraintBottom_toBottomOf="@id/ideasListPageTitle"
             android:src="@drawable/circle_plus_button_base_light"/>
 
         <ScrollView
@@ -43,12 +42,12 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plusCharacterButton"
+            app:layout_constraintTop_toBottomOf="@id/plusIdeaButton"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp">
 
             <LinearLayout
-                android:id="@+id/charactersListLayout"
+                android:id="@+id/ideasListLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>

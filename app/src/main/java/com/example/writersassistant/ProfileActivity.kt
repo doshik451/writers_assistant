@@ -170,8 +170,11 @@ class ProfileActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.profilePage -> true
-                else -> {startActivity(Intent(this@ProfileActivity, RegisterActivity::class.java))
-                    finish()}
+                R.id.ideasPage -> {
+                    startActivity(Intent(this@ProfileActivity, IdeasListActivity::class.java))
+                    finish()
+                }
+                else -> true
             }
             true
         }

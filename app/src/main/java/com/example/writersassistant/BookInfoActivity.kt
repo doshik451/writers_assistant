@@ -33,6 +33,8 @@ class BookInfoActivity : AppCompatActivity() {
     private lateinit var charactersButton: Button
     private lateinit var chaptersButton: Button
     private lateinit var dictionaryButton: Button
+    private lateinit var locationButton: Button
+    private lateinit var groupsButton: Button
     private lateinit var deleteBookButton: Button
     private lateinit var bookTitle: EditText
     private lateinit var database: DatabaseReference
@@ -55,7 +57,9 @@ class BookInfoActivity : AppCompatActivity() {
         bookDescription = findViewById(R.id.bookDescriptionEditText)
         charactersButton = findViewById(R.id.characterListButton)
         chaptersButton = findViewById(R.id.chaptersListButton)
-        dictionaryButton = findViewById(R.id.dictionaryListButton)
+        locationButton = findViewById(R.id.locationListButton)
+        dictionaryButton = findViewById(R.id.dictionaryButton)
+        groupsButton = findViewById(R.id.groupsButton)
         bookTitle = findViewById(R.id.bookTitleEditText)
         deleteBookButton = findViewById(R.id.deleteBookButton)
 
@@ -64,8 +68,10 @@ class BookInfoActivity : AppCompatActivity() {
             bookDescription.setBackgroundResource(R.drawable.rect_base_dark)
             charactersButton.setBackgroundResource(R.drawable.rect_base_dark)
             chaptersButton.setBackgroundResource(R.drawable.rect_base_dark)
-            dictionaryButton.setBackgroundResource(R.drawable.rect_base_dark)
+            locationButton.setBackgroundResource(R.drawable.rect_base_dark)
             deleteBookButton.setBackgroundResource(R.drawable.rect_base_dark)
+            dictionaryButton.setBackgroundResource(R.drawable.rect_base_dark)
+            groupsButton.setBackgroundResource(R.drawable.rect_base_dark)
         }
         authorNameInput = findViewById(R.id.authorNameEditText)
         user = FirebaseAuth.getInstance().currentUser!!
@@ -77,9 +83,34 @@ class BookInfoActivity : AppCompatActivity() {
         deleteBookButton.setOnClickListener { deleteBook() }
 
         charactersButton.setOnClickListener {
-            startActivity(Intent(this@BookInfoActivity, CharactersListActivity::class.java))
+            val intent = Intent(this@BookInfoActivity, CharactersListActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            startActivity(intent)
         }
-        authorNameInput.setText(user.displayName)
+        chaptersButton.setOnClickListener {
+            val intent = Intent(this@BookInfoActivity, ChaptersListActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            startActivity(intent)
+        }
+
+        locationButton.setOnClickListener {
+            val intent = Intent(this@BookInfoActivity, PlacesListActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            startActivity(intent)
+        }
+
+        groupsButton.setOnClickListener {
+            val intent = Intent(this@BookInfoActivity, GroupsListActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            startActivity(intent)
+        }
+
+        dictionaryButton.setOnClickListener {
+            val intent = Intent(this@BookInfoActivity, DictionaryBookActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            startActivity(intent)
+        }
+        //authorNameInput.setText(user.displayName)
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
@@ -91,8 +122,11 @@ class BookInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@BookInfoActivity, MainActivity::class.java))
                     finish()
                 }
-                else -> {startActivity(Intent(this@BookInfoActivity, RegisterActivity::class.java))
-                    finish()}
+                R.id.ideasPage -> {
+                    startActivity(Intent(this@BookInfoActivity, IdeasListActivity::class.java))
+                    finish()
+                }
+                else -> true
             }
             true
         }
@@ -146,7 +180,7 @@ class BookInfoActivity : AppCompatActivity() {
             "authorName" to authorName
         )
         bookId?.let {
-            database.child("books").child(it).setValue(bookData)
+            database.child("books").child(it).updateChildren(bookData)
         }
     }
 

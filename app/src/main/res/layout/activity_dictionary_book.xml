@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharactersListActivity">
+    tools:context=".DictionaryBookActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayoutMainActivity"
@@ -17,10 +17,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/mainPageTitle"
+            android:id="@+id/dictionaryPageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/charactersButton"
+            android:text="@string/dictionaryButton"
             style="@style/fontNameStyle"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
@@ -28,14 +28,14 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-            android:id="@+id/plusCharacterButton"
+            android:id="@+id/plusWordButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="20dp"
-            app:layout_constraintStart_toEndOf="@id/mainPageTitle"
-            app:layout_constraintTop_toTopOf="@id/mainPageTitle"
+            app:layout_constraintStart_toEndOf="@id/dictionaryPageTitle"
+            app:layout_constraintTop_toTopOf="@id/dictionaryPageTitle"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/mainPageTitle"
+            app:layout_constraintBottom_toBottomOf="@id/dictionaryPageTitle"
             android:src="@drawable/circle_plus_button_base_light"/>
 
         <ScrollView
@@ -43,12 +43,12 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/plusCharacterButton"
+            app:layout_constraintTop_toBottomOf="@id/plusWordButton"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp">
 
             <LinearLayout
-                android:id="@+id/charactersListLayout"
+                android:id="@+id/wordsListLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"/>

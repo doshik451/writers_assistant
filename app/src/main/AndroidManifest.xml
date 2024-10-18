@@ -17,8 +17,44 @@
         android:theme="@style/Base.Theme.WritersAssistant"
         tools:targetApi="31">
         <activity
-            android:name=".CharacterInfoActivity"
+            android:name=".GroupsListActivity"
             android:exported="false" />
+        <activity
+            android:name=".GroupInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".PlaceInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".PlacesListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DictionaryBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IdeaInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".IdeasListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChaptersInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ChaptersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CharacterInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CharactersListActivity"
             android:exported="false" />

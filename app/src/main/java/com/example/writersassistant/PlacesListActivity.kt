@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.writersassistant.databinding.ActivityCharactersListBinding
+import com.example.writersassistant.databinding.ActivityPlacesListBinding
 import com.example.writersassistant.utils.LoadSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -22,37 +23,38 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class CharactersListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCharactersListBinding
-    private lateinit var addCharacterButton: ImageView
+class PlacesListActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPlacesListBinding
+    private lateinit var addPlaceButton: ImageView
     private lateinit var bookId: String
     private lateinit var database: DatabaseReference
-    private lateinit var charactersListLayout: LinearLayout
+    private lateinit var placesListLayout: LinearLayout
     private var isNightMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         isNightMode = LoadSettings.loadTheme(this)
-        binding = ActivityCharactersListBinding.inflate(layoutInflater)
+        binding = ActivityPlacesListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
-        addCharacterButton = findViewById(R.id.plusCharacterButton)
+        addPlaceButton = findViewById(R.id.plusPlaceButton)
         bookId = intent.getStringExtra("BOOK_ID").toString()
-        charactersListLayout = findViewById(R.id.charactersListLayout)
+        placesListLayout = findViewById(R.id.placesListLayout)
         database = FirebaseDatabase.getInstance().reference.child("books")
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
-        else addCharacterButton.setImageResource(R.drawable.circle_plus_button_base_dark)
+        else addPlaceButton.setImageResource(R.drawable.circle_plus_button_base_dark)
 
-        loadCharacters()
+        loadPlaces()
 
-        addCharacterButton.setOnClickListener {
-            val intent = Intent(this@CharactersListActivity, CharacterInfoActivity::class.java)
+        addPlaceButton.setOnClickListener {
+            val intent = Intent(this@PlacesListActivity, PlaceInfoActivity::class.java)
             intent.putExtra("BOOK_ID", bookId)
             startActivity(intent)
         }
@@ -60,15 +62,15 @@ class CharactersListActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.profilePage -> {
-                    startActivity(Intent(this@CharactersListActivity, ProfileActivity::class.java))
+                    startActivity(Intent(this@PlacesListActivity, ProfileActivity::class.java))
                     finish()
                 }
                 R.id.mainPage -> {
-                    startActivity(Intent(this@CharactersListActivity, MainActivity::class.java))
+                    startActivity(Intent(this@PlacesListActivity, MainActivity::class.java))
                     finish()
                 }
                 R.id.ideasPage -> {
-                    startActivity(Intent(this@CharactersListActivity, IdeasListActivity::class.java))
+                    startActivity(Intent(this@PlacesListActivity, IdeasListActivity::class.java))
                     finish()
                 }
                 else -> true
@@ -76,13 +78,13 @@ class CharactersListActivity : AppCompatActivity() {
             true
         }
     }
-    private fun loadCharacters() {
+    private fun loadPlaces() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val currentBook = intent.getStringExtra("BOOK_ID")
 
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                charactersListLayout.removeAllViews()
+                placesListLayout.removeAllViews()
                 val density = resources.displayMetrics.density
 
                 for (bookSnapshot in snapshot.children) {
@@ -90,11 +92,11 @@ class CharactersListActivity : AppCompatActivity() {
                     val authorId = bookSnapshot.child("authorId").value.toString()
                     if (authorId == currentUserId) {
                         if(bookId == currentBook) {
-                            for (characterSnapshot in bookSnapshot.child("characters").children) {
-                                val characterId = characterSnapshot.key ?: continue
-                                val characterName = characterSnapshot.child("characterName").value.toString()
-                                val characterButton = Button(this@CharactersListActivity).apply {
-                                    text = characterName
+                            for (placeSnapshot in bookSnapshot.child("places").children) {
+                                val placeId = placeSnapshot.key ?: continue
+                                val placeName = placeSnapshot.child("placeTitle").value.toString()
+                                val placeButton = Button(this@PlacesListActivity).apply {
+                                    text = placeName
                                     layoutParams = LinearLayout.LayoutParams(
                                         (350 * density).toInt(),
                                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -105,18 +107,18 @@ class CharactersListActivity : AppCompatActivity() {
                                     setTextAppearance(R.style.ButtonTextStyle)
                                     setOnClickListener {
                                         val intent = Intent(
-                                            this@CharactersListActivity,
-                                            CharacterInfoActivity::class.java
+                                            this@PlacesListActivity,
+                                            PlaceInfoActivity::class.java
                                         )
                                         intent.putExtra("BOOK_ID", bookId)
-                                        intent.putExtra("CHARACTER_ID", characterId)
+                                        intent.putExtra("PLACE_ID", placeId)
                                         startActivity(intent)
                                     }
                                 }
-                                characterButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
-                                if (isNightMode) characterButton.setBackgroundResource(R.drawable.rect_base_dark)
-                                else characterButton.setBackgroundResource(R.drawable.rect_base)
-                                charactersListLayout.addView(characterButton)
+                                placeButton.setPadding((20 * density).toInt(),(5 * density).toInt(),(20 * density).toInt(),(5 * density).toInt())
+                                if (isNightMode) placeButton.setBackgroundResource(R.drawable.rect_base_dark)
+                                else placeButton.setBackgroundResource(R.drawable.rect_base)
+                                placesListLayout.addView(placeButton)
                             }
                         }
                     }
@@ -124,7 +126,7 @@ class CharactersListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@CharactersListActivity, "Failed to load characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PlacesListActivity, "Failed to load places.", Toast.LENGTH_SHORT).show()
             }
         })
     }

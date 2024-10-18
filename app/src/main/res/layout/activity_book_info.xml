@@ -93,7 +93,7 @@
                 android:background="@drawable/rect_base"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/dictionaryListButton"
+                android:id="@+id/dictionaryButton"
                 android:layout_width="350dp"
                 style="@style/ButtonTextStyle"
                 android:text="@string/dictionaryButton"
@@ -104,13 +104,35 @@
                 android:background="@drawable/rect_base"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/groupsButton"
+                android:layout_width="350dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/groups"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/dictionaryButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/locationListButton"
+                android:layout_width="350dp"
+                style="@style/ButtonTextStyle"
+                android:text="@string/locations"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/groupsButton"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/rect_base"/>
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deleteBookButton"
                 android:layout_width="350dp"
                 style="@style/ButtonTextStyle"
                 android:text="@string/delete_book"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/dictionaryListButton"
+                app:layout_constraintTop_toBottomOf="@id/locationListButton"
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@drawable/rect_base"/>
 

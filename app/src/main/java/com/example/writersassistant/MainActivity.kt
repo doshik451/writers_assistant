@@ -75,12 +75,12 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
                     finish()
                 }
-                R.id.mainPage -> {
-                    startActivity(Intent(this@MainActivity, MainActivity::class.java))
+                R.id.mainPage -> true
+                R.id.ideasPage -> {
+                    startActivity(Intent(this@MainActivity, IdeasListActivity::class.java))
                     finish()
                 }
-                else -> {startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
-                    finish()}
+                else -> true
             }
             true
         }
@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
             else {Toast.makeText(this, R.string.giveAsYourPhoto, Toast.LENGTH_LONG).show()}
         }
     }
+
     private fun loadBooks() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
