@@ -106,7 +106,7 @@ class IdeasListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@IdeasListActivity, "Failed to load ideas.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@IdeasListActivity, R.string.loadedError, Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -80,4 +80,19 @@
     <string name="deleteGroup">Удалить группу</string>
     <string name="deletingGroupText">Вы уверены что хотите удалить группу?</string>
     <string name="groupDeleted">Группа удалена</string>
+    <string name="deletingImageText">Вы уверены что хотите удалить изображение?</string>
+    <string name="loadedError">Ошибка загрузки</string>
+    <string name="youCanOnly">"Вы можете загрузаить только "</string>
+    <string name="images">" изображений"</string>
+    <string name="goal">Цель</string>
+    <string name="motivation">Мотивация</string>
+    <string name="prehistory">Предыстория</string>
+    <string name="aboutCharacter">О персонаже</string>
+    <string name="appearance">Внешность</string>
+    <string name="atmosphere">Атмосфера</string>
+    <string name="cloth">Одежда</string>
+    <string name="firstToSecondConnection">Связь первого со вторым</string>
+    <string name="secondToFirstConnection">Связь второго с первым</string>
+    <string name="deleteConnection">Удаление связи</string>
+    <string name="deletedSuccessfully">Удалено успешно</string>
 </resources>

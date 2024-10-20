@@ -124,7 +124,7 @@ class CharactersListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@CharactersListActivity, "Failed to load characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@CharactersListActivity, R.string.loadedError, Toast.LENGTH_SHORT).show()
             }
         })
     }

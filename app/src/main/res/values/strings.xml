@@ -79,4 +79,19 @@
     <string name="deleteGroup">Delete group</string>
     <string name="deletingGroupText">Are you sure you want to delete the group?</string>
     <string name="groupDeleted">Group deleted</string>
+    <string name="deletingImageText">Are you sure you want to delete the image?</string>
+    <string name="loadedError">Loaded error</string>
+    <string name="youCanOnly">"You can only upload "</string>
+    <string name="images">" images"</string>
+    <string name="goal">Goal</string>
+    <string name="motivation">Motivation</string>
+    <string name="prehistory">Prehistory</string>
+    <string name="aboutCharacter">About character</string>
+    <string name="appearance">Appearance</string>
+    <string name="atmosphere">Atmosphere</string>
+    <string name="cloth">Cloth</string>
+    <string name="firstToSecondConnection">Connection of the first with the second</string>
+    <string name="secondToFirstConnection">Connection of the second with the first</string>
+    <string name="deleteConnection">Delete connection</string>
+    <string name="deletedSuccessfully">Deleted successfully</string>
 </resources>

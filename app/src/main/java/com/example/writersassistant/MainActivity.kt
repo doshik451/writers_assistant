@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
@@ -50,8 +51,8 @@ class MainActivity : AppCompatActivity() {
         isNightMode = LoadSettings.loadTheme(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        RegisterPermissionListener()
-        CheckStoragePermission()
+        registerPermissionListener()
+        checkStoragePermission()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
@@ -86,21 +87,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun CheckStoragePermission(){
-        when{
-            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED -> {}
+    private fun checkStoragePermission() {
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    permissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                }
+            }
             else -> {
-                permissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                }
             }
         }
     }
 
-    private fun RegisterPermissionListener(){
-        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-            if(it) {Toast.makeText(this, R.string.thxxx, Toast.LENGTH_SHORT).show()}
-            else {Toast.makeText(this, R.string.giveAsYourPhoto, Toast.LENGTH_LONG).show()}
+    private fun registerPermissionListener() {
+        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                Toast.makeText(this, R.string.thxxx, Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, R.string.giveAsYourPhoto, Toast.LENGTH_LONG).show()
+            }
         }
     }
+
 
     private fun loadBooks() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
@@ -140,7 +151,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MainActivity, "Failed to load books.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, R.string.loadedError, Toast.LENGTH_SHORT).show()
             }
         })
     }

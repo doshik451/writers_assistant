@@ -34,7 +34,6 @@ class BookInfoActivity : AppCompatActivity() {
     private lateinit var chaptersButton: Button
     private lateinit var dictionaryButton: Button
     private lateinit var locationButton: Button
-    private lateinit var groupsButton: Button
     private lateinit var deleteBookButton: Button
     private lateinit var bookTitle: EditText
     private lateinit var database: DatabaseReference
@@ -59,7 +58,6 @@ class BookInfoActivity : AppCompatActivity() {
         chaptersButton = findViewById(R.id.chaptersListButton)
         locationButton = findViewById(R.id.locationListButton)
         dictionaryButton = findViewById(R.id.dictionaryButton)
-        groupsButton = findViewById(R.id.groupsButton)
         bookTitle = findViewById(R.id.bookTitleEditText)
         deleteBookButton = findViewById(R.id.deleteBookButton)
 
@@ -71,12 +69,12 @@ class BookInfoActivity : AppCompatActivity() {
             locationButton.setBackgroundResource(R.drawable.rect_base_dark)
             deleteBookButton.setBackgroundResource(R.drawable.rect_base_dark)
             dictionaryButton.setBackgroundResource(R.drawable.rect_base_dark)
-            groupsButton.setBackgroundResource(R.drawable.rect_base_dark)
         }
         authorNameInput = findViewById(R.id.authorNameEditText)
         user = FirebaseAuth.getInstance().currentUser!!
 
         database = FirebaseDatabase.getInstance().reference
+        authorNameInput.setText(user.displayName)
         bookId = intent.getStringExtra("BOOK_ID") ?: database.child("books").push().key
         if (bookId != null) loadBookData(bookId!!)
         setupTextChangeListeners()
@@ -99,18 +97,12 @@ class BookInfoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        groupsButton.setOnClickListener {
-            val intent = Intent(this@BookInfoActivity, GroupsListActivity::class.java)
-            intent.putExtra("BOOK_ID", bookId)
-            startActivity(intent)
-        }
-
         dictionaryButton.setOnClickListener {
             val intent = Intent(this@BookInfoActivity, DictionaryBookActivity::class.java)
             intent.putExtra("BOOK_ID", bookId)
             startActivity(intent)
         }
-        //authorNameInput.setText(user.displayName)
+
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){

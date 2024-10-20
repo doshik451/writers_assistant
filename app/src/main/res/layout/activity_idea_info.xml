@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".IdeaInfoActivity">
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/ideaTitleEditText"
@@ -26,9 +26,7 @@
                 android:autofillHints=""
                 android:inputType="text"
                 android:textSize="40sp"
-                android:hint="@string/ideaTitle"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:hint="@string/ideaTitle"/>
 
             <EditText
                 android:id="@+id/ideaDescriptionEditText"
@@ -43,22 +41,18 @@
                 android:overScrollMode="always"
                 android:inputType="textMultiLine"
                 android:background="@drawable/rect_base"
-                style="@style/hintFontStyle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ideaTitleEditText"/>
+                style="@style/hintFontStyle"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deleteIdeaButton"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ideaDescriptionEditText"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 style="@style/ButtonTextStyle"
                 android:text="@string/deleteIdea"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/rect_base"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

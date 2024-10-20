@@ -125,7 +125,7 @@ class ChaptersListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ChaptersListActivity, "Failed to load chapters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChaptersListActivity, R.string.loadedError, Toast.LENGTH_SHORT).show()
             }
         })
     }

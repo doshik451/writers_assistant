@@ -39,12 +39,12 @@ class CharacterInfoActivity : AppCompatActivity() {
     private lateinit var characterName: EditText
     private lateinit var characterAge: EditText
     private lateinit var characterImage: CircleImageView
-    private lateinit var characterAppearanceDescription: EditText
     private lateinit var roleInTheBook: EditText
-    private lateinit var description: EditText
     private lateinit var connectionButton: Button
-    private lateinit var groupsButton: Button
+    private lateinit var aboutCharacterButton: Button
+    private lateinit var storage: FirebaseStorage
     private lateinit var deleteCharacterButton: Button
+    private lateinit var characterReferencesButton: Button
     private lateinit var storageReference: StorageReference
     private lateinit var database: DatabaseReference
     private var imageUri: Uri? = null
@@ -61,7 +61,7 @@ class CharacterInfoActivity : AppCompatActivity() {
     }
 
     private fun uploadImageToFirebase(uri: Uri) {
-        val filePath = storageReference.child("characterImages/${characterId}.jpg")
+        val filePath = storageReference.child("characterMainImage/${bookId}/${characterId}.jpg")
 
         val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri))
         val baos = ByteArrayOutputStream()
@@ -79,7 +79,7 @@ class CharacterInfoActivity : AppCompatActivity() {
     }
 
     private fun loadUserImage() {
-        val filePath = storageReference.child("characterImages/${characterId}.jpg")
+        val filePath = storageReference.child("characterMainImage/${bookId}/${characterId}.jpg")
         filePath.downloadUrl.addOnSuccessListener { uri ->
             Glide.with(this)
                 .load(uri)
@@ -105,15 +105,15 @@ class CharacterInfoActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().reference
         characterId = intent.getStringExtra("CHARACTER_ID") ?: database.child("books").child(bookId).push().key
         characterImage = findViewById(R.id.characterImage)
-        characterAppearanceDescription = findViewById(R.id.characterAppearanceDescriptionEditText)
         roleInTheBook = findViewById(R.id.roleInTheBookEditText)
-        description = findViewById(R.id.descriptionEditText)
         characterName = findViewById(R.id.editTextCharacterName)
         characterAge = findViewById(R.id.editTextCharacterAge)
         connectionButton = findViewById(R.id.connectionButton)
-        groupsButton = findViewById(R.id.groupsButton)
+        aboutCharacterButton = findViewById(R.id.aboutCharacterButton)
+        characterReferencesButton = findViewById(R.id.referencesButton)
         storageReference = FirebaseStorage.getInstance().reference
         deleteCharacterButton = findViewById(R.id.deleteCharacterButton)
+        storage = FirebaseStorage.getInstance()
         characterImage.setOnClickListener {
             pickImage.launch(Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI))
         }
@@ -123,15 +123,35 @@ class CharacterInfoActivity : AppCompatActivity() {
         val mainLayout: ConstraintLayout = findViewById(R.id.main)
         if(!isNightMode) mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.LightBackground))
         else{
-            characterAppearanceDescription.setBackgroundResource(R.drawable.rect_base_dark)
             roleInTheBook.setBackgroundResource(R.drawable.rect_base_dark)
-            description.setBackgroundResource(R.drawable.rect_base_dark)
             connectionButton.setBackgroundResource(R.drawable.rect_base_dark)
-            groupsButton.setBackgroundResource(R.drawable.rect_base_dark)
             deleteCharacterButton.setBackgroundResource(R.drawable.rect_base_dark)
+            aboutCharacterButton.setBackgroundResource(R.drawable.rect_base_dark)
+            characterReferencesButton.setBackgroundResource(R.drawable.rect_base_dark)
         }
 
         deleteCharacterButton.setOnClickListener { deleteCharacter(bookId) }
+
+        aboutCharacterButton.setOnClickListener {
+            val intent = Intent(this@CharacterInfoActivity, CharacterDescriptionActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            intent.putExtra("CHARACTER_ID", characterId)
+            startActivity(intent)
+        }
+
+        characterReferencesButton.setOnClickListener {
+            val intent = Intent(this@CharacterInfoActivity, CharacterReferencesActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            intent.putExtra("CHARACTER_ID", characterId)
+            startActivity(intent)
+        }
+
+        connectionButton.setOnClickListener {
+            val intent = Intent(this@CharacterInfoActivity, CharactersConnectionListActivity::class.java)
+            intent.putExtra("BOOK_ID", bookId)
+            intent.putExtra("CHARACTER_ID", characterId)
+            startActivity(intent)
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
@@ -147,8 +167,7 @@ class CharacterInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@CharacterInfoActivity, IdeasListActivity::class.java))
                     finish()
                 }
-                else -> {startActivity(Intent(this@CharacterInfoActivity, RegisterActivity::class.java))
-                    finish()}
+                else -> true
             }
             true
         }
@@ -159,9 +178,7 @@ class CharacterInfoActivity : AppCompatActivity() {
             if (snapshot.exists()) {
                 characterName.setText(snapshot.child("characterName").value.toString())
                 characterAge.setText(snapshot.child("characterAge").value.toString())
-                description.setText(snapshot.child("description").value.toString())
-                characterAppearanceDescription.setText(snapshot.child("characterAppearanceDescription").value.toString())
-                roleInTheBook.setText(snapshot.child("characterAppearanceDescription").value.toString())
+                roleInTheBook.setText(snapshot.child("roleInTheBook").value.toString())
             }
         }
     }
@@ -176,22 +193,6 @@ class CharacterInfoActivity : AppCompatActivity() {
         })
 
         characterAge.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                saveBookData(bookId.toString())
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        description.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                saveBookData(bookId.toString())
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        characterAppearanceDescription.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 saveBookData(bookId.toString())
             }
@@ -216,8 +217,6 @@ class CharacterInfoActivity : AppCompatActivity() {
         val characterData = mapOf(
             "characterName" to characterNameText,
             "characterAge" to characterAge.text.toString(),
-            "description" to description.text.toString(),
-            "characterAppearanceDescription" to characterAppearanceDescription.text.toString(),
             "roleInTheBook" to roleInTheBook.text.toString()
         )
         characterId?.let {
@@ -231,6 +230,17 @@ class CharacterInfoActivity : AppCompatActivity() {
             .setPositiveButton(R.string.answerYes) { dialog, which ->
                 characterId?.let {
                     database.child("books").child(bookId).child("characters").child(it).removeValue().addOnSuccessListener {
+                        val storageRef = storage.reference.child("character_references/$bookId/$characterId")
+                        storageRef.listAll().addOnSuccessListener { listResult ->
+                            listResult.items.forEach { fileRef ->
+                                fileRef.delete().addOnSuccessListener {
+                                }.addOnFailureListener {
+                                    Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }.addOnFailureListener {
+                            Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
+                        }
                         Toast.makeText(this, R.string.characterDeleted, Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@CharacterInfoActivity, CharactersListActivity::class.java)
                         intent.putExtra("BOOK_ID", bookId)

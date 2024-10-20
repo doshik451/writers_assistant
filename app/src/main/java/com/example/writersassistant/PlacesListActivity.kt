@@ -126,7 +126,7 @@ class PlacesListActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@PlacesListActivity, "Failed to load places.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PlacesListActivity, R.string.loadedError, Toast.LENGTH_SHORT).show()
             }
         })
     }

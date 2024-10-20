@@ -58,7 +58,6 @@
         app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/changeThemeButton"
             android:layout_width="350dp"
