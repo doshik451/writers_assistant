@@ -99,6 +99,10 @@ class CharacterConnectionInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@CharacterConnectionInfoActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@CharacterConnectionInfoActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@CharacterConnectionInfoActivity, IdeasListActivity::class.java))
                     finish()

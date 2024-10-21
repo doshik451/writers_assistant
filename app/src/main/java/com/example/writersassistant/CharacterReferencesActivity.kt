@@ -299,6 +299,10 @@ class CharacterReferencesActivity : AppCompatActivity() {
                     startActivity(Intent(this@CharacterReferencesActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@CharacterReferencesActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@CharacterReferencesActivity, IdeasListActivity::class.java))
                     finish()

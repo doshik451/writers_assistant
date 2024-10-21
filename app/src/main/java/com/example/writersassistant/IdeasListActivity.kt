@@ -61,6 +61,10 @@ class IdeasListActivity : AppCompatActivity() {
                     startActivity(Intent(this@IdeasListActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@IdeasListActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> true
                 else -> false
             }

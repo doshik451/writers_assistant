@@ -230,6 +230,10 @@ class PlaceInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@PlaceInfoActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@PlaceInfoActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@PlaceInfoActivity, IdeasListActivity::class.java))
                     finish()

@@ -171,6 +171,10 @@ class ProfileActivity : AppCompatActivity() {
                     startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@ProfileActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.profilePage -> true
                 R.id.ideasPage -> {
                     startActivity(Intent(this@ProfileActivity, IdeasListActivity::class.java))

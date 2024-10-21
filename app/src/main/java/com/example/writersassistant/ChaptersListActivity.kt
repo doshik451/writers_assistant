@@ -67,6 +67,10 @@ class ChaptersListActivity : AppCompatActivity() {
                     startActivity(Intent(this@ChaptersListActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@ChaptersListActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@ChaptersListActivity, IdeasListActivity::class.java))
                     finish()

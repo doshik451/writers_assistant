@@ -114,6 +114,10 @@ class BookInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@BookInfoActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@BookInfoActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@BookInfoActivity, IdeasListActivity::class.java))
                     finish()

@@ -94,4 +94,10 @@
     <string name="secondToFirstConnection">Connection of the second with the first</string>
     <string name="deleteConnection">Delete connection</string>
     <string name="deletedSuccessfully">Deleted successfully</string>
+    <string name="enterTextToSearch">Enter text to search</string>
+    <string name="book">Book</string>
+    <string name="character">Character</string>
+    <string name="chapter">Chapter</string>
+    <string name="place">Place</string>
+    <string name="idea">Idea</string>
 </resources>

@@ -66,6 +66,10 @@ class WordInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@WordInfoActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@WordInfoActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@WordInfoActivity, IdeasListActivity::class.java))
                     finish()

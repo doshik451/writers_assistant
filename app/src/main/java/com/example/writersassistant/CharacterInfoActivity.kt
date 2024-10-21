@@ -26,8 +26,11 @@ import com.example.writersassistant.databinding.ActivityCharactersListBinding
 import com.example.writersassistant.utils.LoadSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import de.hdodenhof.circleimageview.CircleImageView
@@ -163,6 +166,10 @@ class CharacterInfoActivity : AppCompatActivity() {
                     startActivity(Intent(this@CharacterInfoActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@CharacterInfoActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@CharacterInfoActivity, IdeasListActivity::class.java))
                     finish()
@@ -229,25 +236,71 @@ class CharacterInfoActivity : AppCompatActivity() {
             .setMessage(R.string.deletingCharacterText)
             .setPositiveButton(R.string.answerYes) { dialog, which ->
                 characterId?.let {
-                    database.child("books").child(bookId).child("characters").child(it).removeValue().addOnSuccessListener {
-                        val storageRef = storage.reference.child("character_references/$bookId/$characterId")
-                        storageRef.listAll().addOnSuccessListener { listResult ->
-                            listResult.items.forEach { fileRef ->
-                                fileRef.delete().addOnSuccessListener {
-                                }.addOnFailureListener {
-                                    Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
+                    database.child("books").child(bookId).child("characters").child(it).removeValue()
+                        .addOnSuccessListener {
+                            val storageRef = storage.reference.child("character_references/$bookId/$characterId")
+                            storageRef.listAll().addOnSuccessListener { listResult ->
+                                listResult.items.forEach { fileRef ->
+                                    fileRef.delete().addOnSuccessListener {
+                                    }.addOnFailureListener {
+                                        Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
+                                    }
                                 }
+                            }.addOnFailureListener {
+                                Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
                             }
-                        }.addOnFailureListener {
+
+                            val mainImageRef = storage.reference.child("characterMainImage/$bookId/$characterId.jpg")
+                            mainImageRef.delete().addOnSuccessListener {
+                            }.addOnFailureListener {
+                                Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
+                            }
+                            removeConnectionsForDeletedCharacter(bookId, characterId!!)
+
+                            Toast.makeText(this, R.string.characterDeleted, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@CharacterInfoActivity, CharactersListActivity::class.java)
+                            intent.putExtra("BOOK_ID", bookId)
+                            startActivity(intent)
+                            finish()
+                        }
+                        .addOnFailureListener {
                             Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()
                         }
-                        Toast.makeText(this, R.string.characterDeleted, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@CharacterInfoActivity, CharactersListActivity::class.java)
-                        intent.putExtra("BOOK_ID", bookId)
-                        startActivity(intent)
-                        finish()
-                    }.addOnFailureListener { Toast.makeText(this, R.string.deletionError, Toast.LENGTH_SHORT).show()}
                 }
-            }.setNegativeButton(R.string.answerNo, null).show()
+            }
+            .setNegativeButton(R.string.answerNo, null)
+            .show()
+    }
+
+    private fun removeConnectionsForDeletedCharacter(bookId: String, deletedCharacterId: String) {
+        val charactersRef = database.child("books").child(bookId).child("characters")
+
+        charactersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (characterSnapshot in snapshot.children) {
+                    val currentCharacterId = characterSnapshot.key
+                    characterSnapshot.child("connections").children.forEach { connectionSnapshot ->
+                        val secondCharacterId = connectionSnapshot.child("secondCharacterId").value?.toString()
+                        if (secondCharacterId == deletedCharacterId) {
+                            connectionSnapshot.ref.removeValue().addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    logDeleteStatus("Удалена связь с персонажем $deletedCharacterId у персонажа $currentCharacterId")
+                                } else {
+                                    logDeleteStatus("Ошибка при удалении связи у персонажа $currentCharacterId")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@CharacterInfoActivity, R.string.deletionError, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun logDeleteStatus(message: String) {
+        android.util.Log.e("DeleteConnection", message)
     }
 }

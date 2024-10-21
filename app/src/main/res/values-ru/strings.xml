@@ -95,4 +95,10 @@
     <string name="secondToFirstConnection">Связь второго с первым</string>
     <string name="deleteConnection">Удаление связи</string>
     <string name="deletedSuccessfully">Удалено успешно</string>
+    <string name="enterTextToSearch">Введите текст для поиска</string>
+    <string name="book">Книга</string>
+    <string name="character">Персонаж</string>
+    <string name="chapter">Глава</string>
+    <string name="place">Место</string>
+    <string name="idea">Идея</string>
 </resources>

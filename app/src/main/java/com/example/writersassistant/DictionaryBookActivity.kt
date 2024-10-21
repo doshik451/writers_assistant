@@ -66,6 +66,10 @@ class DictionaryBookActivity : AppCompatActivity() {
                     startActivity(Intent(this@DictionaryBookActivity, MainActivity::class.java))
                     finish()
                 }
+                R.id.searchPage -> {
+                    startActivity(Intent(this@DictionaryBookActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@DictionaryBookActivity, IdeasListActivity::class.java))
                     finish()

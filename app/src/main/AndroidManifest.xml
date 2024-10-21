@@ -22,9 +22,13 @@
         android:theme="@style/Base.Theme.WritersAssistant"
         tools:targetApi="31">
         <activity
-            android:name=".CharacterConnectionInfoActivity"
+            android:name=".SearchingActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="false" />
+        <activity
+            android:name=".CharacterConnectionInfoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CharactersConnectionListActivity"
             android:exported="false" />

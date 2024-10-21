@@ -77,6 +77,10 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.mainPage -> true
+                R.id.searchPage -> {
+                    startActivity(Intent(this@MainActivity, SearchingActivity::class.java))
+                    finish()
+                }
                 R.id.ideasPage -> {
                     startActivity(Intent(this@MainActivity, IdeasListActivity::class.java))
                     finish()
